@@ -28,7 +28,7 @@
 <section id="login-content">
     <div class="login-centre">
         <div class="login-switch clearfix">
-            <p class="fr">我已经注册，现在就 <a href="Login.vue">登录</a></p>
+            <p class="fr">我已经注册，现在就 <a href="login.vue">登录</a></p>
         </div>
         <div class="login-back">
             <div class="H-over">

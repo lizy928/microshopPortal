@@ -2,8 +2,8 @@
   <div>
     <div class="w">
       <div id="logo">
-        <a href="index.html">
-          <img src="/icon/logo.png" alt="">
+        <a href="index.vue">
+          <img src="/static/icon/logo.png" alt="">
         </a>
         <b></b>
       </div>
@@ -45,10 +45,10 @@
                     </span>
                     </div>
                     <!-- 图片验证码开始 fore3-->
-                    <div id="o-authcode" class="item item-vcode item-fore3 hide ">
+                    <div id="o-authcode" class="item item-vcode item-fore3">
                       <input type="text" name="" id="authcode" class="itxt itxt02" name="authcode" tabindex="3">
-                      <input type = "button" id="code"  class="verify-code">
-                      <a href="javascript:;" onclick='createCode();'>看不清换一张</a>
+                      <input type = "button" id="code" v-model="code"  class="verify-code">
+                      <a href="javascript:;" :onclick='bindCode()'>换一张</a>
                     </div>
                     <!-- 自动登录开始fore4 -->
                     <div class="item item-fore4">
@@ -65,7 +65,7 @@
                     <!-- 登录按钮开始 -->
                     <div class="item item-fore5">
                       <div class="login-btn">
-                        <a href="javascript:;" class="btn-img btn-entry" id="loginsubmit" tabindex="6" onClick="validate()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                        <a href="javascript:;" class="btn-img btn-entry" id="loginsubmit" tabindex="6" :onClick="validateCode">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                       </div>
                     </div>
                   </form>
@@ -82,7 +82,7 @@
                 <div class="qrcode-main">
 
                   <div class="qrcode-img" style="">
-                    <img src="theme/login/code.png" alt="">
+                    <img src="/static/login/code.png" alt="">
                     <div class="qrcode-error-02 hide" id="J-qrcodeerror" style="display: none;">
                       <a href="#none">
                         <span class="error-icon"></span>
@@ -126,7 +126,7 @@
         </div>
         <div class="login-banner" style="background-color: #ea4949">
           <div class="w">
-            <div id="banner-bg" class="i-inner" style="background: url(theme/login/a1.jpg);"></div>
+            <div id="banner-bg" class="i-inner" style="background: url(/static/login/a1.jpg);"></div>
           </div>
         </div>
       </div>
@@ -134,6 +134,7 @@
     <div class="w">
       <div id="footer-2013">
         <div class="links">
+          <button  id="msginfo">anniu</button>
           <a href="">关于我们</a>
           |
           <a href="">联系我们</a>
@@ -161,20 +162,46 @@
   </div>
 </template>
 <script>
+import $ from 'jquery';
+import {createCode,validate} from '../../static/js/checkcode.js'
 export default {
   name: 'login',
   data () {
     return {
-      msg: ''
+      code:'',
+      inputCode:'',
+      msg: 'sdfds'
+    }
+  },
+
+  methods:{
+    bindCode(){
+      this.$data.code = ''
+      this.$data.inputCode = ''
+      var a = createCode()
+      this.$data.code = this.createCode
+      this.$data.inputCode = this.$data.code
+    },
+    validateCode(){
+      /*console.log(this.$data.code)
+      var res = validate(this.$data.inputCode,this.$data.code)
+      switch (res){
+        case 0 :{
+          alert("请输入验证码");
+        }
+        case 1 :{
+
+        }
+        case 2 :{
+
+        }
+      }*/
     }
   }
 
+
 }
-//alert($)
-/*$(".login-tab-r").click(function(){
-  $(".login-box").css({"display":"block","visibility":"visible"});
-  $(".qrcode-login").css({"display":"none"})
-});
+
 $(".login-tab-l").click(function(){
   $(".login-box").css({"display":"none"});
   $(".qrcode-login").css({"display":"block","visibility":"visible"})
@@ -192,8 +219,10 @@ $("#nloginpwd").blur(function(){
   if(($("#loginname").val() !="" )&&($("#nloginpwd").val() !="")){
     $("#o-authcode").css({"display":"block"});
   }
-})*/
-/*createCode();*/
+});
+
+
+
 </script>
 
 <style scoped>

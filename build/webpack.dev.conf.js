@@ -14,8 +14,25 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
+
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
+    loaders :[
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.sass$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: '/node_modules/'
+      },
+    ]
+
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -44,6 +61,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     }
   },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
