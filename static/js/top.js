@@ -110,8 +110,8 @@ $(function(){
 
 
 function b() {
-    h = $(window).height(),
-        t = $(document).scrollTop(),
+    var h = $(window).height();
+        var t = $(document).scrollTop();
             t > h ? $("#moquu_top").show() : $("#moquu_top").hide()
 }
 $(document).ready(function() {
@@ -123,3 +123,5 @@ $(document).ready(function() {
     $(window).scroll(function() {
         b()
     });
+
+export {banner}
